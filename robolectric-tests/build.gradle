@@ -1,5 +1,3 @@
-evaluationDependsOn(":app")
-
 apply plugin: 'java'
 
 dependencies {
