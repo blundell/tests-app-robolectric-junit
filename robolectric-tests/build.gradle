@@ -4,10 +4,12 @@ apply plugin: 'java'
 
 dependencies {
     def androidModule = project(':app')
-    compile androidModule
 
-    testCompile androidModule.android.applicationVariants.toList().first().javaCompile.classpath
-    testCompile androidModule.android.applicationVariants.toList().first().javaCompile.outputs.files
+    testCompile project(path: ':app', configuration: 'debugCompile')
+
+    def debugVariant = androidModule.android.applicationVariants.find({it.name == 'debug'})
+    testCompile debugVariant.javaCompile.classpath
+    testCompile debugVariant.javaCompile.outputs.files
     testCompile files(androidModule.plugins.findPlugin("com.android.application").getBootClasspath())
 
     testCompile 'junit:junit:4.+'
